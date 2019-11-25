@@ -1,0 +1,10 @@
+server:
+  port: 8080 #应用启动端口
+  session:
+    cookie:
+      http-only: true
+
+spring:
+  thymeleaf:
+    cache: false #关闭thymeleaf缓存
+    mode: XHTML

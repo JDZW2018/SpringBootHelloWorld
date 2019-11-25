@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>MyCalculator</title>
+
+</head>
+<body>
+<h2> 111 </h2>
+<h2> 111</h2>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<input type="text" id="text_value" disabled>
+
+<table>
+    <tr>
+
+        <td>
+            <input type="button" class="number_button" value="2" onclick="get_value(this.value);">
+        </td>
+        <td>
+            <input type="button" class="number_button" value="4" onclick="get_value(this.value);">
+        </td>
+
+        <td>
+            <button class="clear_button" id="clear_button"> AC </button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="button" class="number_button" value="6" onclick="get_value(this.value);">
+        </td>
+        <td>
+            <input type="button" class="number_button" value="8" onclick="get_value(this.value);">
+        </td>
+        <td>
+            <input type="button" class="operator" value="-" onclick="get_value(this.value);">
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <input type="button" class="number_button" value="0" onclick="get_value(this.value);">
+        </td>
+        <td>
+            <input type="button" class="operator" value="." onclick="get_value(this.value);">
+        </td>
+        <td>
+            <input type="button" class="operator" value="*" onclick="get_value(this.value);">
+        </td>
+
+        <td>
+            <button class="calculates" id="calculates"> = </button>
+        </td>
+    </tr>
+</table>
+<br>
+<textarea rows="10" cols="30" id="history">
+
+        </textarea>
+<br>
+<button id="translate">translate</button>
+<br>
+<textarea rows="10" cols="30" id="response" disabled>
+
+        </textarea>
+</body>
+<script type="text/javascript">
+
+    var result = document.getElementById("text_value").value;
+    var clearButton = document.getElementById("clear_button");
+    clearButton.onclick = function() {
+        document.getElementById("text_value").value = "";
+        document.getElementById("history").value = "";
+    }
+
+
+    var calculate = document.getElementById("calculates");
+    calculate.onclick = function() {
+        result = document.getElementById("text_value").value;
+        document.getElementById("text_value").value = eval(result);
+        if (document.getElementById("text_value").value === undefined) {
+            document.getElementById("text_value").value = ""
+        }
+        var curr_history = document.getElementById("history").value;
+        var new_history = result + '=' + document.getElementById("text_value").value;
+        document.getElementById("history").value = curr_history + " \n " + new_history;
+
+    }
+
+    function get_value(value) {
+        document.getElementById("text_value").value += value;
+    }
+
+    var translate = document.getElementById("translate");
+    translate.onclick = function() {
+        console.log("translate");
+        var number = document.getElementById("text_value").value;
+        console.log(number);
+
+
+        $.ajax({
+            url: "http://cgi.sice.indiana.edu/~examples/info-i494/api/index.php/magic-number",
+            type: "POST",
+            dataType: 'json',
+            data: {
+                'team': 67,
+                'number': number
+            },
+            success: function(data) {
+                console.log(data);
+                alert("Status: " + data.status);
+                if (data.status) {
+                    alert("Message: " + data.message);
+                }
+                document.getElementById("response").value = JSON.stringify(data);
+            }
+        })
+
+
+    }
+</script>
+</html>
