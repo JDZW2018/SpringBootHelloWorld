@@ -14,18 +14,6 @@
 	<form id="loginPageForm">
 		<table>
 			<tbody>
-				<!--<tr>-->
-					<!--<td>逻辑系统id</td>-->
-					<!--<td><input th:type="text" th:id="sysId"-->
-						<!--th:name="sysId" th:value="1cab27def8fb4c0f9486dcf844b783c0" /></td>-->
-					<!--<td><font color="red">*</font></td>-->
-				<!--</tr>-->
-				<tr>
-					<td>逻辑系统id</td>
-					<td><input th:type="text" th:id="sysId"
-						th:name="sysId" th:value="1cab27def8fb4c0f9486dcf844b783c0" /></td>
-					<td><font color="red">*</font></td>
-				</tr>
 				<tr>
 					<td>账号</td>
 					<td><input th:type="text" th:id="loginName"
@@ -62,10 +50,9 @@
             $("#password").val("");
         }
         function login() {
-            var loginPath = "uaa/oauth/token";
+            var loginPath = "/user/login";
             var loginName = $("#loginName").val();
             var password = $("#password").val();
-            var sysId = $("#sysId").val();
             if(loginName == ""){
                 alert("账号不能为空");
                 return false;
@@ -75,29 +62,29 @@
                 return false;
             }
             var data = {
-                    username: loginName,
-                    password: password,
-                    grant_type: "password",
-                    sysId: sysId
+                	name: loginName,
+                    pwd: password
+                    //grant_type: "password",
               };
-            var headers = {
-                    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-                    "Authorization": "Basic d2ViX2FwcDo="
-                };
+            // var headers = {
+            //         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            //         "Authorization": "Basic d2ViX2FwcDo="
+            //     };
             $.ajax({
                 url:loginPath,
                 type:"post",
                 dataType:"json",
                 contentType: "application/json",
-                headers: headers,
+                //headers: headers,
                 async: false,
                 data:data,
                 success:function callbackFun(data){
-                    //解析json
-                    if(data.access_token!=null){
-                    		localStorage.setItem("jhi-authenticationtoken",data.access_token);
-                        window.location.href ="/api-doc?Authorization="+data.access_token;
-                    }
+                    alert("data:"+data)
+                    // //解析json
+                    // if(data.access_token!=null){
+                    // 		localStorage.setItem("jhi-authenticationtoken",data.access_token);
+                    //     window.location.href ="/api-doc?Authorization="+data.access_token;
+                    // }
                 },
                 error:function(data){
                 		alert("登陆失败，用户名或密码错误！");
