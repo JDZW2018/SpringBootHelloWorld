@@ -1,9 +1,6 @@
 package userLoginTest;
 
-/**
- * @author Tianfusheng
- * @date 2018/9/8
- */
+
 public class User {
     private String username;
     private String password;

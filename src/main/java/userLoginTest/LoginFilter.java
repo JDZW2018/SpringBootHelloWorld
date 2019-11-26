@@ -1,5 +1,6 @@
 package userLoginTest;
 
+import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 import org.springframework.util.StringUtils;
@@ -8,13 +9,10 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-/**
- * @author Tianfusheng
- * @date 2018/9/8
- */
-//@Component
+
+@Component
 public class LoginFilter implements Filter {
-    private static final String[] paths={"/user/login"};
+    private static final String[] paths={"/user/login","/user/tologin","/**/css/**","/**/js/**"};
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
