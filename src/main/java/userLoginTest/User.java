@@ -4,12 +4,12 @@ package userLoginTest;
 public class User {
     private String username;
     private String password;
-    private int grade;
+    private String id;
 
-    public User(String name, String pwd, int gd) {
+    public User(String name, String pwd, String _id) {
         username = name;
         password = pwd;
-        grade = gd;
+        id = _id;
     }
 
     public String getUsername() {
@@ -28,11 +28,11 @@ public class User {
         this.password = password;
     }
 
-    public int getGrade() {
-        return grade;
+    public String getId() {
+        return id;
     }
 
-    public void setGrade(int grade) {
-        this.grade = grade;
+    public void setId(String id) {
+        this.id = id;
     }
 }

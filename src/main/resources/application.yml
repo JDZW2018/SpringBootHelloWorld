@@ -7,3 +7,11 @@ spring:
     cache: false #关闭thymeleaf缓存
     mode: XHTML
     prefix: classpath:/templates/
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    # 基本属性
+    url: jdbc:mysql://172.16.60.41:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: root
+    contype: mysql
